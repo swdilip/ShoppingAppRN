@@ -3,7 +3,7 @@ import {Text, ScrollView} from 'react-native';
 
 import ProductCard from '../components/ProductCard';
 
-export default function () {
+export default function ({navigation}) {
   const [products, setProducts] = useState();
 
   useEffect(() => {
@@ -20,7 +20,10 @@ export default function () {
   return (
     <ScrollView>
       <Text>Home Screen</Text>
-      {products && products.map(product => <ProductCard product={product} />)}
+      {products &&
+        products.map(product => (
+          <ProductCard product={product} navigation={navigation} />
+        ))}
     </ScrollView>
   );
 }
