@@ -20,7 +20,6 @@ export default function () {
   return (
     <ScrollView>
       <Text>Home Screen</Text>
-
       {products && products.map(product => <ProductCard product={product} />)}
     </ScrollView>
   );
