@@ -37,7 +37,18 @@ function App(): JSX.Element {
               ),
             })}
           />
-          <Stack.Screen name="Product">
+          <Stack.Screen
+            name="Product"
+            options={({navigation}) => ({
+              headerRight: () => (
+                <Button
+                  title="Shop Cart"
+                  onPress={() => {
+                    navigation.navigate('ShoppingCart');
+                  }}
+                />
+              ),
+            })}>
             {props => <ProductScreen {...props} />}
           </Stack.Screen>
           <Stack.Screen name="ShoppingCart" component={ShoppingCartScreen} />
