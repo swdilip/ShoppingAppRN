@@ -10,7 +10,6 @@ export default function ({navigation}) {
     async function getProducts() {
       const productsList = await fetch('https://fakestoreapi.com/products/');
       const json = await productsList.json();
-      console.log(json);
       setProducts(json);
     }
 
