@@ -21,8 +21,8 @@ export default function ({navigation}) {
     <ScrollView>
       <Text>Home Screen</Text>
       {products &&
-        products.map(product => (
-          <ProductCard product={product} navigation={navigation} />
+        products.map((product, i) => (
+          <ProductCard product={product} navigation={navigation} key={i} />
         ))}
     </ScrollView>
   );
