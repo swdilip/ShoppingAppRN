@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Text, ScrollView} from 'react-native';
+import {Text, ScrollView, FlatList} from 'react-native';
 
 import ProductCard from '../components/ProductCard';
 
@@ -17,12 +17,13 @@ export default function ({navigation}) {
   }, []);
 
   return (
-    <ScrollView>
-      <Text>Home Screen</Text>
-      {products &&
-        products.map((product, i) => (
-          <ProductCard product={product} navigation={navigation} key={i} />
-        ))}
-    </ScrollView>
+    products && (
+      <FlatList
+        data={products}
+        renderItem={product => (
+          <ProductCard product={product.item} navigation={navigation} />
+        )}
+      />
+    )
   );
 }
