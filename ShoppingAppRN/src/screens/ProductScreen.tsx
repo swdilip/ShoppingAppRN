@@ -30,7 +30,6 @@ export default function ProductScreen() {
       productToAdd = {cartId: 0, product: product};
     }
 
-    console.log(items);
     setItems([...items, productToAdd]);
     Alert.alert('Added to Cart!');
   }
