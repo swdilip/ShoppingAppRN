@@ -6,8 +6,8 @@ import ProductCard from '../components/ProductCard';
 export default function ({navigation}) {
   const {items, setItems} = useContext(ShopCartContext);
 
-  function removeItem(itemId) {
-    const updatedItems = items.filter(item => item.id !== itemId);
+  function removeItem(itemCartId) {
+    const updatedItems = items.filter(item => item.cartId !== itemCartId);
     setItems(updatedItems);
   }
 
@@ -16,12 +16,16 @@ export default function ({navigation}) {
       {items &&
         items.map((item, i) => (
           <View>
-            <ProductCard product={item} navigation={navigation} key={i} />
-            <Text>{i}</Text>
+            <ProductCard
+              product={item.product}
+              navigation={navigation}
+              key={i}
+            />
+            <Text>{item.cartId}</Text>
             <Button
               title="Remove from Cart"
               onPress={() => {
-                removeItem(item.id);
+                removeItem(item.cartId);
               }}
             />
           </View>

@@ -21,6 +21,20 @@ export default function ProductScreen() {
     getProduct();
   }, [productId]);
 
+  function addItem() {
+    let productToAdd;
+    if (items.length > 0) {
+      const prevCartId = items.slice(-1)[0].cartId;
+      productToAdd = {cartId: prevCartId + 1, product: product};
+    } else {
+      productToAdd = {cartId: 0, product: product};
+    }
+
+    console.log(items);
+    setItems([...items, productToAdd]);
+    Alert.alert('Added to Cart!');
+  }
+
   return (
     product && (
       <View>
@@ -37,13 +51,7 @@ export default function ProductScreen() {
           Rating: {product.rating.rate} by {product.rating.count} Users
         </Text>
         <Text>Price: {product.price}</Text>
-        <Button
-          title="Add to Cart"
-          onPress={() => {
-            setItems([...items, product]);
-            Alert.alert('Added to Cart!');
-          }}
-        />
+        <Button title="Add to Cart" onPress={addItem} />
       </View>
     )
   );
