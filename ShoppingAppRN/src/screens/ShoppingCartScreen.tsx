@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Text, ScrollView, Button, View} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import ProductCard from '../components/ProductCard';
@@ -13,11 +13,11 @@ export default function ({navigation}) {
 
   return (
     <ScrollView>
-      <Text>Home Screen</Text>
       {items &&
         items.map((item, i) => (
           <View>
             <ProductCard product={item} navigation={navigation} key={i} />
+            <Text>{i}</Text>
             <Button
               title="Remove from Cart"
               onPress={() => {

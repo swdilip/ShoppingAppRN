@@ -4,7 +4,7 @@ import {Text, View, Image, TouchableHighlight} from 'react-native';
 export default function ProductCard({product, navigation}) {
   return (
     <TouchableHighlight
-      onPress={() => navigation.navigate('Product', {product: product})}>
+      onPress={() => navigation.navigate('Product', {productId: product.id})}>
       <View>
         <Text>{product.title}</Text>
         <View>
