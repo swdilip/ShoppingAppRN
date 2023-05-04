@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {Text, ScrollView, Button, View} from 'react-native';
+import {Text, ScrollView, Button, View, FlatList} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import ProductCard from '../components/ProductCard';
 
@@ -11,25 +11,22 @@ export default function ({navigation}) {
     setItems(updatedItems);
   }
 
-  return (
-    <ScrollView>
-      {items &&
-        items.map((item, i) => (
-          <View>
-            <ProductCard
-              product={item.product}
-              navigation={navigation}
-              key={i}
-            />
-            <Text>{item.cartId}</Text>
-            <Button
-              title="Remove from Cart"
-              onPress={() => {
-                removeItem(item.cartId);
-              }}
-            />
-          </View>
-        ))}
-    </ScrollView>
+  return items.length > 0 ? (
+    <FlatList
+      data={items}
+      renderItem={item => (
+        <View>
+          <ProductCard product={item.item.product} navigation={navigation} />
+          <Button
+            title="Remove from Cart"
+            onPress={() => {
+              removeItem(item.item.cartId);
+            }}
+          />
+        </View>
+      )}
+    />
+  ) : (
+    <Text>No Items in your Cart!</Text>
   );
 }
