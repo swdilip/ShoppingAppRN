@@ -24,7 +24,7 @@ function HomeStackScreen() {
   );
 }
 
-function Navigators(): JSX.Element {
+function Routes(): JSX.Element {
   const {items} = useContext(ShopCartContext);
   return (
     <NavigationContainer>
@@ -63,4 +63,4 @@ function Navigators(): JSX.Element {
   );
 }
 
-export default Navigators;
+export default Routes;
