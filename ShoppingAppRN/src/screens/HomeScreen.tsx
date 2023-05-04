@@ -10,7 +10,6 @@ export default function ({navigation}) {
     async function getProducts() {
       const productsList = await fetch('https://fakestoreapi.com/products/');
       const json = await productsList.json();
-      console.log(json);
       setProducts(json);
     }
 
@@ -21,8 +20,8 @@ export default function ({navigation}) {
     <ScrollView>
       <Text>Home Screen</Text>
       {products &&
-        products.map(product => (
-          <ProductCard product={product} navigation={navigation} />
+        products.map((product, i) => (
+          <ProductCard product={product} navigation={navigation} key={i} />
         ))}
     </ScrollView>
   );
