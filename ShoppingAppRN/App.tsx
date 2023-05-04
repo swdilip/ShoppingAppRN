@@ -8,6 +8,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomeScreen from './src/screens/HomeScreen';
 import ProductScreen from './src/screens/ProductScreen';
@@ -17,42 +18,27 @@ import {Button} from 'react-native';
 import {ShopCartProvider} from './src/context/ShopCartContext';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function HomeStackScreen() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Product">
+        {props => <ProductScreen {...props} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+}
 
 function App(): JSX.Element {
   return (
     <ShopCartProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={({navigation}) => ({
-              headerRight: () => (
-                <Button
-                  title="Shop Cart"
-                  onPress={() => {
-                    navigation.navigate('ShoppingCart');
-                  }}
-                />
-              ),
-            })}
-          />
-          <Stack.Screen
-            name="Product"
-            options={({navigation}) => ({
-              headerRight: () => (
-                <Button
-                  title="Shop Cart"
-                  onPress={() => {
-                    navigation.navigate('ShoppingCart');
-                  }}
-                />
-              ),
-            })}>
-            {props => <ProductScreen {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="ShoppingCart" component={ShoppingCartScreen} />
-        </Stack.Navigator>
+        <Tab.Navigator screenOptions={{headerShown: false}}>
+          <Tab.Screen name="HomeTab" component={HomeStackScreen} />
+          <Tab.Screen name="ShoppingCart" component={ShoppingCartScreen} />
+        </Tab.Navigator>
       </NavigationContainer>
     </ShopCartProvider>
   );
