@@ -24,12 +24,14 @@ function HomeStackScreen() {
   );
 }
 
-function Navigators(): JSX.Element {
+function Routes(): JSX.Element {
   const {items} = useContext(ShopCartContext);
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={({route}) => ({
+          headerShown: route.name === 'Shopping Cart' ? true : false,
+        })}
         initialRouteName="HomeTab">
         <Tab.Screen
           name="HomeTab"
@@ -45,7 +47,7 @@ function Navigators(): JSX.Element {
           }}
         />
         <Tab.Screen
-          name="ShoppingCart"
+          name="Shopping Cart"
           component={ShoppingCartScreen}
           options={{
             tabBarIcon: () => {
@@ -63,4 +65,4 @@ function Navigators(): JSX.Element {
   );
 }
 
-export default Navigators;
+export default Routes;
