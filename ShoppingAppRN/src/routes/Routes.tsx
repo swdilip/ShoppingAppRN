@@ -29,7 +29,9 @@ function Routes(): JSX.Element {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={({route}) => ({
+          headerShown: route.name === 'Shopping Cart' ? true : false,
+        })}
         initialRouteName="HomeTab">
         <Tab.Screen
           name="HomeTab"
@@ -45,7 +47,7 @@ function Routes(): JSX.Element {
           }}
         />
         <Tab.Screen
-          name="ShoppingCart"
+          name="Shopping Cart"
           component={ShoppingCartScreen}
           options={{
             tabBarIcon: () => {

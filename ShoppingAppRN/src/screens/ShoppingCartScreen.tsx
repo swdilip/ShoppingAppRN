@@ -37,7 +37,7 @@ export default function ({navigation}) {
           </View>
         )}
       />
-      <Text>Total: {totalPrice}</Text>
+      <Text>Total: £{totalPrice}</Text>
     </View>
   ) : (
     <View style={styles.cartEmptyView}>
