@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Text, Button, View, FlatList, StyleSheet} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import ProductCard from '../components/ProductCard';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function ({navigation}) {
   const {items, setItems} = useContext(ShopCartContext);
@@ -42,6 +43,7 @@ export default function ({navigation}) {
   ) : (
     <View style={styles.cartEmptyView}>
       <Text style={styles.cartEmptyText}>No Items found in your 🛒!</Text>
+      <Icon name="rocket" size={30} color="#300" />
     </View>
   );
 }
