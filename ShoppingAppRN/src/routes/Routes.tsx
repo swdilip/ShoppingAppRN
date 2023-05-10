@@ -13,7 +13,7 @@ import {ShopCartContext} from '../context/ShopCartContext';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStackScreen() {
+function HomeStackScreen(): JSX.Element {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
