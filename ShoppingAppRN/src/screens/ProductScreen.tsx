@@ -3,7 +3,7 @@ import {Image, Text, View, Button, Alert} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {ShopCartContext} from '../context/ShopCartContext';
 
-export default function ProductScreen() {
+export default function ProductScreen(): JSX.Element {
   const route = useRoute();
   const productId = route.params?.productId;
   const {items, setItems} = useContext(ShopCartContext);
@@ -16,6 +16,7 @@ export default function ProductScreen() {
         `https://fakestoreapi.com/products/${productId}`,
       );
       const json = await productDetails.json();
+      console.log(json);
       setProduct(json);
     }
     getProduct();

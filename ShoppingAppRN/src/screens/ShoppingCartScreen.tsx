@@ -2,8 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Text, Button, View, FlatList, StyleSheet} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import ProductCard from '../components/ProductCard';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {NavigationProps} from '../Types';
 
-export default function ({navigation}) {
+export default function ({navigation}: NavigationProps) {
   const {items, setItems} = useContext(ShopCartContext);
   const [totalPrice, setTotalPrice] = useState(0);
 

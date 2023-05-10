@@ -6,14 +6,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import ProductScreen from '../screens/ProductScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStackScreen() {
+function HomeStackScreen(): JSX.Element {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -40,7 +41,7 @@ function Routes(): JSX.Element {
             tabBarIcon: () => {
               return (
                 <View>
-                  <Text>🏠</Text>
+                  <Icon name="home" size={30} color="#6b6964" />
                 </View>
               );
             },
@@ -53,7 +54,7 @@ function Routes(): JSX.Element {
             tabBarIcon: () => {
               return (
                 <View>
-                  <Text>🛒</Text>
+                  <Icon name="shopping-cart" size={30} color="#6b6964" />
                 </View>
               );
             },
