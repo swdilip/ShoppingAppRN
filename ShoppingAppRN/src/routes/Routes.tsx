@@ -32,7 +32,7 @@ export type HomeScreenProps = NativeStackScreenProps<
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 const Tab = createBottomTabNavigator();
 
-function HomeStackScreen(): JSX.Element {
+function HomeStackScreen() {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -43,7 +43,7 @@ function HomeStackScreen(): JSX.Element {
   );
 }
 
-function Routes(): JSX.Element {
+function Routes() {
   const {items} = useContext(ShopCartContext);
   return (
     <NavigationContainer>

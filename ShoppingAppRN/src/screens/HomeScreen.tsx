@@ -18,14 +18,14 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     getProducts();
   }, []);
 
-  return (
-    products && (
-      <FlatList
-        data={products}
-        renderItem={product => (
-          <ProductCard product={product.item} navigation={navigation} />
-        )}
-      />
-    )
+  return products ? (
+    <FlatList
+      data={products}
+      renderItem={product => (
+        <ProductCard product={product.item} navigation={navigation} />
+      )}
+    />
+  ) : (
+    <></>
   );
 }
