@@ -16,6 +16,7 @@ export default function ProductScreen() {
         `https://fakestoreapi.com/products/${productId}`,
       );
       const json = await productDetails.json();
+      console.log(json);
       setProduct(json);
     }
     getProduct();

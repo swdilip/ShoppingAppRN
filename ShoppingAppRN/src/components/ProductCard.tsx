@@ -1,7 +1,14 @@
 import React from 'react';
 import {Text, View, Image, TouchableHighlight, StyleSheet} from 'react-native';
+import {Product} from '../Types';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
-export default function ProductCard({product, navigation}) {
+interface ProductCardProps {
+  product: Product;
+  navigation: NavigationProp<ParamListBase>;
+}
+
+export default function ProductCard({product, navigation}: ProductCardProps) {
   return (
     <TouchableHighlight
       onPress={() => navigation.navigate('Product', {productId: product.id})}>
