@@ -2,9 +2,11 @@ import React, {useContext, useState, useEffect} from 'react';
 import {Image, Text, View, Button, Alert} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {ShopCartContext} from '../context/ShopCartContext';
+import {ProductScreenProps} from '../routes/Routes';
 
-export default function ProductScreen(): JSX.Element {
-  const route = useRoute();
+export default function ProductScreen({
+  route,
+}: ProductScreenProps): JSX.Element {
   const productId = route.params?.productId;
   const {items, setItems} = useContext(ShopCartContext);
 

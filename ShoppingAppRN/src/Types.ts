@@ -16,5 +16,5 @@ export interface Rating {
 }
 
 export interface NavigationProps {
-  navigation?: NavigationProp<ParamListBase>;
+  navigation: NavigationProp<ParamListBase>;
 }

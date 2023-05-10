@@ -2,17 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {FlatList} from 'react-native';
 
 import ProductCard from '../components/ProductCard';
-// import {NavigationProps} from '../Types';
-import {
-  NavigationProp,
-  RouteProp,
-  ParamListBase,
-} from '@react-navigation/native';
-interface NavigationProps {
-  navigation: NavigationProp<ParamListBases>;
-}
+import {HomeScreenProps} from '../routes/Routes';
 
-export default function HomeScreen({navigation}: NavigationProps) {
+export default function HomeScreen({navigation}: HomeScreenProps) {
   const [products, setProducts] = useState();
 
   useEffect(() => {

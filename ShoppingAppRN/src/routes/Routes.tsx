@@ -1,6 +1,9 @@
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeScreen';
@@ -11,7 +14,22 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';
 
-const Stack = createNativeStackNavigator();
+type HomeStackParamList = {
+  Home: undefined;
+  Product: {productId: number};
+};
+
+export type ProductScreenProps = NativeStackScreenProps<
+  HomeStackParamList,
+  'Product'
+>;
+
+export type HomeScreenProps = NativeStackScreenProps<
+  HomeStackParamList,
+  'Home'
+>;
+
+const Stack = createNativeStackNavigator<HomeStackParamList>();
 const Tab = createBottomTabNavigator();
 
 function HomeStackScreen(): JSX.Element {
