@@ -44,7 +44,6 @@ export default function ({navigation}: NavigationProps) {
   ) : (
     <View style={styles.cartEmptyView}>
       <Text style={styles.cartEmptyText}>No Items found in your 🛒!</Text>
-      <Icon name="rocket" size={30} color="#300" />
     </View>
   );
 }
