@@ -34,7 +34,15 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
       renderItem={product => (
         <ProductCard product={product.item} navigation={navigation} />
       )}
-      ListHeaderComponent={<Button title="Logout" onPress={logOut} />}
+      ListHeaderComponent={
+        <Button
+          title="Logout"
+          onPress={async () => {
+            await logOut();
+            navigation.reset({routes: [{name: 'LoginStack'}]});
+          }}
+        />
+      }
     />
   );
 }

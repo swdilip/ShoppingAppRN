@@ -1,10 +1,11 @@
 import {Text, Button, View} from 'react-native';
 import {UserAuthContext} from '../context/UserAuthContext';
 import React, {useCallback, useContext} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function LoginScreen() {
   const {login} = useContext(UserAuthContext);
+  const navigation = useNavigation();
 
   const loginUser = async () => {
     // 1. Make an HTTP Post request with my email and password
@@ -12,6 +13,7 @@ export default function LoginScreen() {
     // 3. If the response is 200, store the token in storage AND in context
     const response = {statusCode: 200, data: {token: '123-456-789'}};
     await login(response.data.token);
+    navigation.reset({routes: [{name: 'App'}]});
   };
 
   return (
