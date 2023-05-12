@@ -98,14 +98,18 @@ export type LoginProps = NativeStackScreenProps<
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
 
 function Routes() {
-  const {loggedIn, appLoaded} = useContext(UserAuthContext);
-  console.log(loggedIn);
+  const {appLoaded, isLoggedIn} = useContext(UserAuthContext);
+
   if (!appLoaded) {
     return null;
   }
+
+  // The app has loaded.
+
   return (
     <NavigationContainer>
-      <LogInStack.Navigator initialRouteName={loggedIn ? 'App' : 'LoginStack'}>
+      <LogInStack.Navigator
+        initialRouteName={isLoggedIn ? 'App' : 'LoginStack'}>
         <LogInStack.Screen name="LoginStack" component={LoginScreen} />
         <LogInStack.Screen name="App" component={AppTabScreen} />
       </LogInStack.Navigator>
