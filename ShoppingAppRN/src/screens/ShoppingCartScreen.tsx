@@ -9,13 +9,13 @@ export default function ({navigation}: NavigationProps) {
   const {items, setItems} = useContext(ShopCartContext);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  function removeItem(itemCartId) {
+  function removeItem(itemCartId: number) {
     const updatedItems = items.filter(item => item.cartId !== itemCartId);
     setItems(updatedItems);
   }
 
   useEffect(() => {
-    function sum(total, item) {
+    function sum(total: number, item) {
       return total + item.product.price;
     }
     const total = items?.reduce(sum, 0);
