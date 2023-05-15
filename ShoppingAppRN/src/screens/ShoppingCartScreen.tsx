@@ -40,6 +40,12 @@ export default function ({navigation}: NavigationProps) {
         )}
       />
       <Text>Total: £{totalPrice}</Text>
+      <Button
+        title="Checkout"
+        onPress={() => {
+          navigation.navigate('Checkout');
+        }}
+      />
     </View>
   ) : (
     <View style={styles.cartEmptyView}>
