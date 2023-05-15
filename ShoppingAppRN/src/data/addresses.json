@@ -1,0 +1,53 @@
+{
+  "addresses": [
+    {
+      "houseNumber": 11,
+      "streetName": "Rainbow Road",
+      "town": "Wembley",
+      "city": "London",
+      "postCode": "HA01AU"
+    },
+    {
+      "houseNumber": 12,
+      "streetName": "Rainbow Road",
+      "town": "Wembley",
+      "city": "London",
+      "postCode": "HA01AU"
+    },
+    {
+      "houseNumber": 13,
+      "streetName": "Rainbow Road",
+      "town": "Wembley",
+      "city": "London",
+      "postCode": "HA01AU"
+    },
+    {
+      "houseNumber": 132,
+      "streetName": "Market Road",
+      "town": "Sudbury",
+      "city": "London",
+      "postCode": "HA04YG"
+    },
+    {
+      "houseNumber": 254,
+      "streetName": "High Street",
+      "town": "Sudbury",
+      "city": "London",
+      "postCode": "HA04YG"
+    },
+    {
+      "houseNumber": 7,
+      "streetName": "Complinsult Road",
+      "town": "Nuna",
+      "city": "London",
+      "postCode": "N111PQ"
+    },
+    {
+      "houseNumber": 96,
+      "streetName": "Great Road",
+      "town": "Nuna",
+      "city": "London",
+      "postCode": "N111PQ"
+    }
+  ]
+}
