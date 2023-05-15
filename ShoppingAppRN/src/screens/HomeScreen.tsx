@@ -16,7 +16,6 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     async function getProducts() {
       const productsList = await fetch('https://fakestoreapi.com/products/');
       const json = await productsList.json();
-      console.log(navigation);
       setProducts(json);
     }
 

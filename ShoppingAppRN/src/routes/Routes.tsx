@@ -35,9 +35,14 @@ const Stack = createNativeStackNavigator<HomeStackParamList>();
 const Tab = createBottomTabNavigator();
 
 function HomeStackScreen() {
+  const {user} = useContext(UserAuthContext);
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: `Hello, ${user}`}}
+      />
       <Stack.Screen name="Product">
         {props => <ProductScreen {...props} />}
       </Stack.Screen>

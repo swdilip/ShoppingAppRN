@@ -5,6 +5,7 @@ export const UserAuthContext = createContext([]);
 // const waitFor = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const UserAuthProvider = ({children}) => {
+  const [user, setUser] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [appLoaded, setAppLoaded] = useState(false);
   const isLoggedIn = !!token;
@@ -36,7 +37,8 @@ export const UserAuthProvider = ({children}) => {
   }, []);
 
   return (
-    <UserAuthContext.Provider value={{appLoaded, isLoggedIn, login, logOut}}>
+    <UserAuthContext.Provider
+      value={{user, setUser, appLoaded, isLoggedIn, login, logOut}}>
       {children}
     </UserAuthContext.Provider>
   );
