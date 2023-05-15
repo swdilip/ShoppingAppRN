@@ -109,7 +109,10 @@ function Routes() {
   return (
     <NavigationContainer>
       <LogInStack.Navigator
-        initialRouteName={isLoggedIn ? 'App' : 'LoginStack'}>
+        initialRouteName={isLoggedIn ? 'App' : 'LoginStack'}
+        screenOptions={{
+          headerShown: false,
+        }}>
         <LogInStack.Screen name="LoginStack" component={LoginScreen} />
         <LogInStack.Screen name="App" component={AppTabScreen} />
       </LogInStack.Navigator>
