@@ -1,6 +1,6 @@
 import {Text, Button, View, TextInput} from 'react-native';
 import {UserAuthContext} from '../context/UserAuthContext';
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 export default function LoginScreen() {
@@ -18,7 +18,7 @@ export default function LoginScreen() {
     navigation.reset({routes: [{name: 'App'}]});
   };
 
-  function onChangeHandler(e) {
+  function onChangeHandler(e: string) {
     setUserName(e);
   }
 
