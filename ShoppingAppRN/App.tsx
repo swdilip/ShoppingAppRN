@@ -1,14 +1,17 @@
 import React from 'react';
 
 import {ShopCartProvider} from './src/context/ShopCartContext';
+import {UserAuthProvider} from './src/context/UserAuthContext';
 
 import Navigators from './src/routes/Routes';
 
 function App(): JSX.Element {
   return (
-    <ShopCartProvider>
-      <Navigators />
-    </ShopCartProvider>
+    <UserAuthProvider>
+      <ShopCartProvider>
+        <Navigators />
+      </ShopCartProvider>
+    </UserAuthProvider>
   );
 }
 

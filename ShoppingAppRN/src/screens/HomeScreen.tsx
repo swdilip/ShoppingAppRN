@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {FlatList} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {Button, FlatList} from 'react-native';
 
 import ProductCard from '../components/ProductCard';
-// import {NavigationProps} from '../Types';
-import {
-  NavigationProp,
-  RouteProp,
-  ParamListBase,
-} from '@react-navigation/native';
-interface NavigationProps {
-  navigation: NavigationProp<ParamListBases>;
-}
+import {HomeScreenProps} from '../routes/Routes';
+import {Product} from '../Types';
 
-export default function HomeScreen({navigation}: NavigationProps) {
-  const [products, setProducts] = useState();
+import {View, Text} from 'react-native';
+import {UserAuthContext} from '../context/UserAuthContext';
+
+export default function HomeScreen({navigation}: HomeScreenProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const {logOut} = useContext(UserAuthContext);
 
   useEffect(() => {
     async function getProducts() {
@@ -27,13 +24,25 @@ export default function HomeScreen({navigation}: NavigationProps) {
   }, []);
 
   return (
-    products && (
-      <FlatList
-        data={products}
-        renderItem={product => (
-          <ProductCard product={product.item} navigation={navigation} />
-        )}
-      />
-    )
+    <FlatList
+      data={products}
+      ListEmptyComponent={
+        <View>
+          <Text>No Products to display</Text>
+        </View>
+      }
+      renderItem={product => (
+        <ProductCard product={product.item} navigation={navigation} />
+      )}
+      ListHeaderComponent={
+        <Button
+          title="Logout"
+          onPress={async () => {
+            await logOut();
+            navigation.reset({routes: [{name: 'LoginStack'}]});
+          }}
+        />
+      }
+    />
   );
 }
