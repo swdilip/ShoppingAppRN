@@ -5,7 +5,7 @@ export const UserAuthContext = createContext([]);
 // const waitFor = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const UserAuthProvider = ({children}) => {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [appLoaded, setAppLoaded] = useState(false);
   const isLoggedIn = !!token;
