@@ -1,10 +1,25 @@
 import React, {createContext, useState, useEffect, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const UserAuthContext = createContext([]);
-// const waitFor = ms => new Promise(resolve => setTimeout(resolve, ms));
+interface UserAuthContext {
+  user: string | null;
+  setUser: React.Dispatch<React.SetStateAction<string | null>>;
+  appLoaded: Boolean;
+  isLoggedIn: Boolean;
+  login: (token: string) => Promise<void>;
+  logOut: () => Promise<void>;
+}
 
-export const UserAuthProvider = ({children}) => {
+export const UserAuthContext = createContext<UserAuthContext>({
+  user: null,
+  setUser: undefined!,
+  isLoggedIn: false,
+  appLoaded: false,
+  login: undefined!,
+  logOut: undefined!,
+});
+
+export const UserAuthProvider = ({children}: {children: React.ReactNode}) => {
   const [user, setUser] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [appLoaded, setAppLoaded] = useState(false);
@@ -15,6 +30,7 @@ export const UserAuthProvider = ({children}) => {
       await restoreApp();
     }
     restore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const restoreApp = useCallback(async () => {

@@ -1,14 +1,41 @@
-import React from 'react';
-import {Text, TextInput, View, Button} from 'react-native';
+import React, {useState} from 'react';
+import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
+import Autocomplete from 'react-native-autocomplete-input';
+import data from '../data/addresses.json';
 
 export default function CheckoutScreen() {
+  const [query, setQuery] = useState('');
+  const items = data.addresses.map(item => {
+    return (
+      item.houseNumber +
+      ' ' +
+      item.streetName +
+      ', ' +
+      item.town +
+      ', ' +
+      item.city +
+      ', ' +
+      item.postCode
+    );
+  });
   return (
     <View>
       <Text>Checkout</Text>
       <Text>Recipient Name</Text>
       <TextInput placeholder="Enter Name" />
-      <Text>Address Name</Text>
-      <TextInput placeholder="Enter Address" />
+      <Text>Address</Text>
+      {/* <TextInput placeholder="Enter Address" /> */}
+      <View style={styles.autocompleteContainer}>
+        <Autocomplete
+          data={items}
+          value={query}
+          onChangeText={text => setQuery(text)}
+          flatListProps={{
+            renderItem: ({item}) => <Text>{item}</Text>,
+          }}
+        />
+      </View>
+      {/* <Text>Choose Shipping Date</Text> */}
       <Button title="Place Order" />
     </View>
   );
@@ -19,3 +46,14 @@ export default function CheckoutScreen() {
 //Shipping Date
 //Shopping cart overview
 //Payment method
+
+const styles = StyleSheet.create({
+  autocompleteContainer: {
+    flex: 1,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1,
+  },
+});
