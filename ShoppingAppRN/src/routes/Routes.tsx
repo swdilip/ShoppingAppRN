@@ -10,11 +10,13 @@ import HomeScreen from '../screens/HomeScreen';
 import ProductScreen from '../screens/ProductScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import LoginScreen from '../screens/LoginScreen';
+import CheckoutScreen from '../screens/CheckoutScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';
-import {UserAuthContext} from '../context/UserAuthContext';
+import {useAuthContext} from '../context/UserAuthContext';
 
 type HomeStackParamList = {
   Home: undefined;
@@ -33,9 +35,10 @@ export type HomeScreenProps = NativeStackScreenProps<
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 const Tab = createBottomTabNavigator();
+const CartStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
-  const {user} = useContext(UserAuthContext);
+  const {user} = useAuthContext();
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
@@ -50,13 +53,22 @@ function HomeStackScreen() {
   );
 }
 
+function ShoppingCartStackScreen() {
+  return (
+    <CartStack.Navigator initialRouteName="Shopping Cart">
+      <CartStack.Screen name="Shopping Cart" component={ShoppingCartScreen} />
+      <CartStack.Screen name="Checkout" component={CheckoutScreen} />
+    </CartStack.Navigator>
+  );
+}
+
 function AppTabScreen() {
   const {items} = useContext(ShopCartContext);
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        headerShown: route.name === 'Shopping Cart' ? true : false,
-      })}
+      screenOptions={{
+        headerShown: false,
+      }}
       initialRouteName="HomeTab">
       <Tab.Screen
         name="HomeTab"
@@ -72,8 +84,8 @@ function AppTabScreen() {
         }}
       />
       <Tab.Screen
-        name="Shopping Cart"
-        component={ShoppingCartScreen}
+        name="ShoppingCartTab"
+        component={ShoppingCartStackScreen}
         options={{
           tabBarIcon: () => {
             return (
@@ -83,6 +95,19 @@ function AppTabScreen() {
             );
           },
           tabBarBadge: items?.length,
+        }}
+      />
+      <Tab.Screen
+        name="ProfileTab"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: () => {
+            return (
+              <View>
+                <Icon name="user" size={30} color="#6b6964" />
+              </View>
+            );
+          },
         }}
       />
     </Tab.Navigator>
@@ -103,7 +128,7 @@ export type LoginProps = NativeStackScreenProps<
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
 
 function Routes() {
-  const {appLoaded, isLoggedIn} = useContext(UserAuthContext);
+  const {appLoaded, isLoggedIn} = useAuthContext();
 
   if (!appLoaded) {
     return null;
