@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
-import Autocomplete from 'react-native-autocomplete-input';
 import data from '../data/addresses.json';
-import notifee from '@notifee/react-native';
+import notifee, {TimestampTrigger, TriggerType} from '@notifee/react-native';
 
 async function onDisplayNotification() {
   await notifee.requestPermission();
@@ -23,6 +22,32 @@ async function onDisplayNotification() {
       },
     },
   });
+}
+
+async function onCreateTriggerNotification() {
+  //   const channelID = await notifee.createChannel({
+  //     id: 'default',
+  //     name: 'Default Channel',
+  //   });
+
+  const date = new Date(Date.now());
+  date.setMinutes(date.getMinutes() + 1);
+
+  const trigger: TimestampTrigger = {
+    type: TriggerType.TIMESTAMP,
+    timestamp: date.getTime(),
+  };
+
+  await notifee.createTriggerNotification(
+    {
+      title: 'Your Order has been delivered!',
+      body: 'Recieved by a very nice person',
+      android: {
+        channelId: 'default',
+      },
+    },
+    trigger,
+  );
 }
 
 export default function CheckoutScreen() {
@@ -51,7 +76,8 @@ export default function CheckoutScreen() {
       <Button
         title="Place Order"
         onPress={() => {
-          onDisplayNotification();
+          //   onDisplayNotification();
+          onCreateTriggerNotification();
         }}
       />
     </View>
