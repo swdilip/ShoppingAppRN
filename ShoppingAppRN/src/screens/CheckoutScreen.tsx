@@ -2,53 +2,10 @@ import React, {useState} from 'react';
 import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
 import data from '../data/addresses.json';
 import notifee, {TimestampTrigger, TriggerType} from '@notifee/react-native';
-
-async function onDisplayNotification() {
-  await notifee.requestPermission();
-
-  const channelID = await notifee.createChannel({
-    id: 'default',
-    name: 'Default Channel',
-  });
-
-  await notifee.displayNotification({
-    title: 'HELOOO WORLD',
-    body: 'This notification seems to be working idk bruv',
-    android: {
-      channelId: channelID,
-      smallIcon: 'ic_launcher_round',
-      pressAction: {
-        id: 'default',
-      },
-    },
-  });
-}
-
-async function onCreateTriggerNotification() {
-  //   const channelID = await notifee.createChannel({
-  //     id: 'default',
-  //     name: 'Default Channel',
-  //   });
-
-  const date = new Date(Date.now());
-  date.setMinutes(date.getMinutes() + 1);
-
-  const trigger: TimestampTrigger = {
-    type: TriggerType.TIMESTAMP,
-    timestamp: date.getTime(),
-  };
-
-  await notifee.createTriggerNotification(
-    {
-      title: 'Your Order has been delivered!',
-      body: 'Recieved by a very nice person',
-      android: {
-        channelId: 'default',
-      },
-    },
-    trigger,
-  );
-}
+import {
+  onDisplayNotification,
+  onCreateTriggerNotification,
+} from '../utils/notifications';
 
 export default function CheckoutScreen() {
   const [query, setQuery] = useState('');
@@ -76,8 +33,8 @@ export default function CheckoutScreen() {
       <Button
         title="Place Order"
         onPress={() => {
-          //   onDisplayNotification();
-          onCreateTriggerNotification();
+          onDisplayNotification();
+          //   onCreateTriggerNotification();
         }}
       />
     </View>
