@@ -2,6 +2,28 @@ import React, {useState} from 'react';
 import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
 import data from '../data/addresses.json';
+import notifee from '@notifee/react-native';
+
+async function onDisplayNotification() {
+  await notifee.requestPermission();
+
+  const channelID = await notifee.createChannel({
+    id: 'default',
+    name: 'Default Channel',
+  });
+
+  await notifee.displayNotification({
+    title: 'HELOOO WORLD',
+    body: 'This notification seems to be working idk bruv',
+    android: {
+      channelId: channelID,
+      smallIcon: 'ic_launcher_round',
+      pressAction: {
+        id: 'default',
+      },
+    },
+  });
+}
 
 export default function CheckoutScreen() {
   const [query, setQuery] = useState('');
@@ -26,7 +48,12 @@ export default function CheckoutScreen() {
       <Text>Address</Text>
       <TextInput placeholder="Enter Address" />
       <Text>Choose Shipping Date</Text>
-      <Button title="Place Order" />
+      <Button
+        title="Place Order"
+        onPress={() => {
+          onDisplayNotification();
+        }}
+      />
     </View>
   );
 }
