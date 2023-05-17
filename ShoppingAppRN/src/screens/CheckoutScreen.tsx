@@ -24,18 +24,8 @@ export default function CheckoutScreen() {
       <Text>Recipient Name</Text>
       <TextInput placeholder="Enter Name" />
       <Text>Address</Text>
-      {/* <TextInput placeholder="Enter Address" /> */}
-      <View style={styles.autocompleteContainer}>
-        <Autocomplete
-          data={items}
-          value={query}
-          onChangeText={text => setQuery(text)}
-          flatListProps={{
-            renderItem: ({item}) => <Text>{item}</Text>,
-          }}
-        />
-      </View>
-      {/* <Text>Choose Shipping Date</Text> */}
+      <TextInput placeholder="Enter Address" />
+      <Text>Choose Shipping Date</Text>
       <Button title="Place Order" />
     </View>
   );

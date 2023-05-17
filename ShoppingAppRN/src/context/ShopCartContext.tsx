@@ -1,9 +1,18 @@
 import React, {createContext, useState} from 'react';
+import {Product} from '../Types';
 
-export const ShopCartContext = createContext([]);
+interface ShopCartContext {
+  items: Array<Product>;
+  setItems: React.Dispatch<React.SetStateAction<Array<Product>>>;
+}
 
-export const ShopCartProvider = ({children}) => {
-  const [items, setItems] = useState([]);
+export const ShopCartContext = createContext<ShopCartContext>({
+  items: [],
+  setItems: undefined!,
+});
+
+export const ShopCartProvider = ({children}: {children: React.ReactNode}) => {
+  const [items, setItems] = useState<Array<Product>>([]);
 
   return (
     <ShopCartContext.Provider value={{items, setItems}}>

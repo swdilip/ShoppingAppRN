@@ -11,11 +11,12 @@ import ProductScreen from '../screens/ProductScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CheckoutScreen from '../screens/CheckoutScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';
-import {UserAuthContext} from '../context/UserAuthContext';
+import {useAuthContext} from '../context/UserAuthContext';
 
 type HomeStackParamList = {
   Home: undefined;
@@ -37,7 +38,7 @@ const Tab = createBottomTabNavigator();
 const CartStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
-  const {user} = useContext(UserAuthContext);
+  const {user} = useAuthContext();
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
@@ -96,6 +97,19 @@ function AppTabScreen() {
           tabBarBadge: items?.length,
         }}
       />
+      <Tab.Screen
+        name="ProfileTab"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: () => {
+            return (
+              <View>
+                <Icon name="user" size={30} color="#6b6964" />
+              </View>
+            );
+          },
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -114,7 +128,7 @@ export type LoginProps = NativeStackScreenProps<
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
 
 function Routes() {
-  const {appLoaded, isLoggedIn} = useContext(UserAuthContext);
+  const {appLoaded, isLoggedIn} = useAuthContext();
 
   if (!appLoaded) {
     return null;
