@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
 import data from '../data/addresses.json';
-import notifee, {TimestampTrigger, TriggerType} from '@notifee/react-native';
 import {
   onDisplayNotification,
   onCreateTriggerNotification,
@@ -34,7 +33,7 @@ export default function CheckoutScreen() {
         title="Place Order"
         onPress={() => {
           onDisplayNotification();
-          //   onCreateTriggerNotification();
+          onCreateTriggerNotification(15);
         }}
       />
     </View>
