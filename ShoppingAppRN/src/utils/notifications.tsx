@@ -1,4 +1,8 @@
-import notifee, {TimestampTrigger, TriggerType} from '@notifee/react-native';
+import notifee, {
+  AndroidStyle,
+  TimestampTrigger,
+  TriggerType,
+} from '@notifee/react-native';
 
 export async function onDisplayNotification() {
   await notifee.requestPermission();
@@ -37,6 +41,11 @@ export async function onCreateTriggerNotification(interval: number) {
       body: 'Your order for the product should be with you shortly!',
       android: {
         channelId: 'default',
+        style: {
+          type: AndroidStyle.BIGPICTURE,
+          picture:
+            'https://www.scienceabc.com/wp-content/uploads/2018/02/The-Flash-2014-TV-series.jpg',
+        },
       },
     },
     trigger,
