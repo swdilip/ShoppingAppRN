@@ -28,7 +28,7 @@ export default function CheckoutScreen() {
       <TextInput placeholder="Enter Name" />
       <Text>Address</Text>
       <TextInput placeholder="Enter Address" />
-      <Text>Choose Shipping Date</Text>
+      <Text>Choose Shipping Time</Text>
       <Button
         title="Place Order"
         onPress={() => {
