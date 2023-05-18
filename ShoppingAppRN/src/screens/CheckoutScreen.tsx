@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
-import Autocomplete from 'react-native-autocomplete-input';
 import data from '../data/addresses.json';
+import {
+  onDisplayNotification,
+  onCreateTriggerNotification,
+} from '../utils/notifications';
 
 export default function CheckoutScreen() {
   const [query, setQuery] = useState('');
@@ -26,7 +29,13 @@ export default function CheckoutScreen() {
       <Text>Address</Text>
       <TextInput placeholder="Enter Address" />
       <Text>Choose Shipping Date</Text>
-      <Button title="Place Order" />
+      <Button
+        title="Place Order"
+        onPress={() => {
+          onDisplayNotification();
+          onCreateTriggerNotification(15);
+        }}
+      />
     </View>
   );
 }
