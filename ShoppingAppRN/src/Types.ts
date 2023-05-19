@@ -23,5 +23,5 @@ export type Order = {
   items: Product[];
   user: string;
   address: string;
-  deliveryTime: Date;
+  deliveryTime: number;
 };

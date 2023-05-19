@@ -3,6 +3,7 @@ import React, {useContext} from 'react';
 import {Text, View, FlatList, Image, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {OrdersContext} from '../context/OrdersContext';
+import {Product} from '../Types';
 
 export default function () {
   const {orders} = useContext(OrdersContext);
@@ -16,6 +17,7 @@ export default function () {
             items={item.item.items}
             name={item.item.user}
             address={item.item.address}
+            deliveryTime={item.item.deliveryTime}
           />
         )}
         ListEmptyComponent={
@@ -28,25 +30,32 @@ export default function () {
   );
 }
 
-function OrderCard({items, name, address}) {
+function OrderCard({items, name, address, deliveryTime}) {
   return (
     <View style={styles.orderCardBorder}>
       <LinearGradient
         colors={['red', 'orange']}
         style={styles.gradientBackground}>
         <View style={styles.orderCardContainer}>
-          <Text>{name}</Text>
-          <Text>{address}</Text>
+          <Text style={styles.nameText}>Recipient: {name}</Text>
+          <Text style={styles.addressText}>Address: {address}</Text>
+          <Text style={styles.addressText}>Delivery: {deliveryTime}</Text>
           <View>
             <FlatList
               data={items}
               horizontal={true}
               renderItem={item => (
-                <View style={styles.picture}>
-                  <Image
-                    source={{uri: item.item.product.image}}
-                    style={styles.displayImg}
-                  />
+                <View style={styles.pictureGradientContainer}>
+                  <LinearGradient
+                    colors={['#E5D05B', '#E55B88']}
+                    style={styles.pictureGradient}>
+                    <View style={styles.picture}>
+                      <Image
+                        source={{uri: item.item.product.image}}
+                        style={styles.displayImg}
+                      />
+                    </View>
+                  </LinearGradient>
                 </View>
               )}
             />
@@ -55,19 +64,24 @@ function OrderCard({items, name, address}) {
       </LinearGradient>
     </View>
   );
+
+  function orderStatusBadge() {
+    //If time of delivery is greater -> Display Delivered
+    //Otherwise, processing
+  }
 }
 
 const styles = StyleSheet.create({
   picture: {
-    flex: 0.3,
-    marginRight: 15,
-    width: 100,
-    height: 100,
-    padding: 1,
+    width: 75,
+    height: 75,
+    backgroundColor: 'white',
+    resizeMode: 'contain',
+    borderRadius: 5,
   },
   displayImg: {
-    height: 100,
-    width: 100,
+    height: 75,
+    width: 75,
     resizeMode: 'contain',
   },
   orderCardBorder: {
@@ -85,5 +99,24 @@ const styles = StyleSheet.create({
   },
   gradientBackground: {
     borderRadius: 7,
+  },
+  pictureGradientContainer: {
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 2,
+  },
+  pictureGradient: {
+    padding: 3,
+    borderRadius: 5,
+  },
+  nameText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  addressText: {
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });

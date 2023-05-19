@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
-import data from '../data/addresses.json';
+import {Text, TextInput, View, Button} from 'react-native';
 import {
   onDisplayNotification,
   onCreateTriggerNotification,
@@ -12,13 +11,12 @@ import {ShopCartContext} from '../context/ShopCartContext';
 export default function CheckoutScreen() {
   const {orders, setOrders} = useContext(OrdersContext);
   const {items} = useContext(ShopCartContext);
-  const date = new Date(Date.now());
   // const [query, setQuery] = useState('');
   const [order, setOrder] = useState<Order>({
     items: [],
     user: '',
     address: '',
-    deliveryTime: date,
+    deliveryTime: 0,
   });
   // const Addresses = data.addresses.map(item => {
   //   return (
@@ -39,6 +37,7 @@ export default function CheckoutScreen() {
       ...order,
       items: items,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onNameChangeHandler(e: string) {
@@ -55,6 +54,14 @@ export default function CheckoutScreen() {
     });
   }
 
+  function placeOrder() {
+    const date = new Date(Date.now());
+    date.setSeconds(date.getSeconds() + 10);
+    onDisplayNotification();
+    onCreateTriggerNotification(15);
+    setOrders([...orders, {...order, deliveryTime: date.getTime()}]);
+  }
+
   return (
     <View>
       <Text>Checkout</Text>
@@ -66,14 +73,7 @@ export default function CheckoutScreen() {
         onChangeText={onAddressChangeHandler}
       />
       <Text>Choose Shipping Time</Text>
-      <Button
-        title="Place Order"
-        onPress={() => {
-          onDisplayNotification();
-          onCreateTriggerNotification(15);
-          setOrders([...orders, order]);
-        }}
-      />
+      <Button title="Place Order" onPress={placeOrder} />
     </View>
   );
 }
@@ -83,14 +83,3 @@ export default function CheckoutScreen() {
 //Shipping Date
 //Shopping cart overview
 //Payment method
-
-const styles = StyleSheet.create({
-  autocompleteContainer: {
-    flex: 1,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    zIndex: 1,
-  },
-});
