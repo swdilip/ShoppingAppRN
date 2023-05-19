@@ -56,7 +56,7 @@ export default function CheckoutScreen() {
 
   function placeOrder() {
     const date = new Date(Date.now());
-    date.setSeconds(date.getSeconds() + 10);
+    date.setSeconds(date.getSeconds() + 15);
     onDisplayNotification();
     onCreateTriggerNotification(15);
     setOrders([...orders, {...order, deliveryTime: date.getTime()}]);

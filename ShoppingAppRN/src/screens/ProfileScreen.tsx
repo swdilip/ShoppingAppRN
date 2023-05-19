@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {Text, View, FlatList, Image, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -40,6 +40,7 @@ function OrderCard({items, name, address, deliveryTime}) {
           <Text style={styles.nameText}>Recipient: {name}</Text>
           <Text style={styles.addressText}>Address: {address}</Text>
           <Text style={styles.addressText}>Delivery: {deliveryTime}</Text>
+          <OrderStatusBadge deliveryTime={deliveryTime} />
           <View>
             <FlatList
               data={items}
@@ -64,11 +65,37 @@ function OrderCard({items, name, address, deliveryTime}) {
       </LinearGradient>
     </View>
   );
+}
 
-  function orderStatusBadge() {
-    //If time of delivery is greater -> Display Delivered
-    //Otherwise, processing
+function OrderStatusBadge({deliveryTime}) {
+  //If time of delivery is greater -> Display Delivered
+  //Otherwise, processing
+  const currentTime = new Date(Date.now());
+  const [delivered, setDelivered] = useState(false);
+
+  function deliveryStatusUpdater() {
+    setDelivered(true);
   }
+
+  useEffect(() => {
+    const deliveryTimeOut = setTimeout(
+      deliveryStatusUpdater,
+      deliveryTime - currentTime.getTime(),
+    );
+
+    return () => clearTimeout(deliveryTimeOut);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <View>
+      {delivered ? (
+        <Text style={styles.deliveredStatusText}>Delivered</Text>
+      ) : (
+        <Text style={styles.processingStatusText}>Processing</Text>
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -118,5 +145,15 @@ const styles = StyleSheet.create({
   addressText: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  deliveredStatusText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'green',
+  },
+  processingStatusText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'red',
   },
 });
