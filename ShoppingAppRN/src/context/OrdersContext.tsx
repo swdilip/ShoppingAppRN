@@ -1,13 +1,8 @@
 import React, {createContext, useState} from 'react';
-import {Product} from '../Types';
+import {Order} from '../Types';
 
 //Create a type for order
 //Would be similar to ShopCartContext
-type Order = {
-  items: Array<Product>;
-  user: string;
-  deliveryTime: Date;
-};
 
 interface OrdersContext {
   orders: Array<Order> | [];
