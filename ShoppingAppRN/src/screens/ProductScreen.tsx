@@ -1,5 +1,13 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Image, Text, View, Button, Alert, StyleSheet} from 'react-native';
+import {
+  Image,
+  Text,
+  View,
+  Button,
+  Alert,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import {ProductScreenProps} from '../routes/Routes';
 import {Product} from '../Types';
@@ -35,26 +43,37 @@ export default function ProductScreen({route}: ProductScreenProps) {
   }
 
   return product ? (
-    <View style={styles.backgroundContainer}>
-      <View style={styles.imageView}>
-        <Image source={{uri: product.image}} style={styles.imageStyle} />
-      </View>
+    <ScrollView>
+      <View style={styles.backgroundContainer}>
+        <View style={styles.imageView}>
+          <Image source={{uri: product.image}} style={styles.imageStyle} />
+        </View>
 
-      <View style={styles.infoContainer}>
-        <View style={styles.titlePriceContainer}>
-          <Text style={styles.title}>{product.title}</Text>
-          <Text style={styles.price}>£{product.price}</Text>
-        </View>
-        <Text>Category: {product.category}</Text>
-        <Text>Description: {product.description}</Text>
-        <Text>
-          Rating: {product.rating.rate} by {product.rating.count} Users
-        </Text>
-        <View style={styles.buttonContainer}>
-          <Button title="Add to Cart" onPress={addItem} />
+        <View style={styles.infoContainer}>
+          <View style={styles.titlePriceContainer}>
+            <Text style={styles.title}>{product.title}</Text>
+            <Text style={styles.price}>£{product.price}</Text>
+          </View>
+          <View style={styles.attributeContainer}>
+            <Text style={styles.attributeKey}>Category</Text>
+            <Text>{product.category}</Text>
+          </View>
+          <View style={styles.attributeContainer}>
+            <Text style={styles.attributeKey}>Description</Text>
+            <Text>{product.description}</Text>
+          </View>
+          <View style={styles.attributeContainer}>
+            <Text style={styles.attributeKey}>Rating</Text>
+            <Text>
+              {product.rating.rate} by {product.rating.count} Users
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button title="Add to Cart" onPress={addItem} />
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   ) : (
     <></>
   );
@@ -103,5 +122,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginHorizontal: 20,
     marginTop: 15,
+  },
+  attributeContainer: {
+    marginBottom: 10,
+  },
+  attributeKey: {
+    fontWeight: 'bold',
+    fontSize: 17,
   },
 });
