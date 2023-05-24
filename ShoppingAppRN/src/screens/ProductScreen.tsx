@@ -36,10 +36,10 @@ export default function ProductScreen({route}: ProductScreenProps) {
 
   return product ? (
     <View>
-      <Text>{product.title}</Text>
-      <View>
+      <View style={styles.imageView}>
         <Image source={{uri: product.image}} style={styles.imageStyle} />
       </View>
+      <Text style={styles.title}>{product.title}</Text>
       <Text>Category: {product.category}</Text>
       <Text>Description: {product.description}</Text>
       <Text>
@@ -55,7 +55,21 @@ export default function ProductScreen({route}: ProductScreenProps) {
 
 const styles = StyleSheet.create({
   imageStyle: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+  },
+  imageView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 20,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    elevation: 5,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
