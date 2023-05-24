@@ -35,18 +35,25 @@ export default function ProductScreen({route}: ProductScreenProps) {
   }
 
   return product ? (
-    <View>
+    <View style={styles.backgroundContainer}>
       <View style={styles.imageView}>
         <Image source={{uri: product.image}} style={styles.imageStyle} />
       </View>
-      <Text style={styles.title}>{product.title}</Text>
-      <Text>Category: {product.category}</Text>
-      <Text>Description: {product.description}</Text>
-      <Text>
-        Rating: {product.rating.rate} by {product.rating.count} Users
-      </Text>
-      <Text>Price: {product.price}</Text>
-      <Button title="Add to Cart" onPress={addItem} />
+
+      <View style={styles.infoContainer}>
+        <View style={styles.titlePriceContainer}>
+          <Text style={styles.title}>{product.title}</Text>
+          <Text style={styles.price}>£{product.price}</Text>
+        </View>
+        <Text>Category: {product.category}</Text>
+        <Text>Description: {product.description}</Text>
+        <Text>
+          Rating: {product.rating.rate} by {product.rating.count} Users
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button title="Add to Cart" onPress={addItem} />
+        </View>
+      </View>
     </View>
   ) : (
     <></>
@@ -71,5 +78,30 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 20,
+    flex: 0.9,
+  },
+  infoContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  titlePriceContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  price: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: '#F4ACB7',
+  },
+  backgroundContainer: {
+    backgroundColor: '#D8E2DC',
+  },
+  buttonContainer: {
+    marginHorizontal: 20,
+    marginTop: 15,
   },
 });
