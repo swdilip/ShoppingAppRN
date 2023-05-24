@@ -1,5 +1,13 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Image, Text, View, Button, Alert, StyleSheet} from 'react-native';
+import {
+  Image,
+  Text,
+  View,
+  Button,
+  Alert,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import {ProductScreenProps} from '../routes/Routes';
 import {Product} from '../Types';
@@ -35,19 +43,37 @@ export default function ProductScreen({route}: ProductScreenProps) {
   }
 
   return product ? (
-    <View>
-      <Text>{product.title}</Text>
-      <View>
-        <Image source={{uri: product.image}} style={styles.imageStyle} />
+    <ScrollView>
+      <View style={styles.backgroundContainer}>
+        <View style={styles.imageView}>
+          <Image source={{uri: product.image}} style={styles.imageStyle} />
+        </View>
+
+        <View style={styles.infoContainer}>
+          <View style={styles.titlePriceContainer}>
+            <Text style={styles.title}>{product.title}</Text>
+            <Text style={styles.price}>£{product.price}</Text>
+          </View>
+          <View style={styles.attributeContainer}>
+            <Text style={styles.attributeKey}>Category</Text>
+            <Text>{product.category}</Text>
+          </View>
+          <View style={styles.attributeContainer}>
+            <Text style={styles.attributeKey}>Description</Text>
+            <Text>{product.description}</Text>
+          </View>
+          <View style={styles.attributeContainer}>
+            <Text style={styles.attributeKey}>Rating</Text>
+            <Text>
+              {product.rating.rate} by {product.rating.count} Users
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button title="Add to Cart" onPress={addItem} />
+          </View>
+        </View>
       </View>
-      <Text>Category: {product.category}</Text>
-      <Text>Description: {product.description}</Text>
-      <Text>
-        Rating: {product.rating.rate} by {product.rating.count} Users
-      </Text>
-      <Text>Price: {product.price}</Text>
-      <Button title="Add to Cart" onPress={addItem} />
-    </View>
+    </ScrollView>
   ) : (
     <></>
   );
@@ -55,7 +81,53 @@ export default function ProductScreen({route}: ProductScreenProps) {
 
 const styles = StyleSheet.create({
   imageStyle: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+  },
+  imageView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 20,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    elevation: 5,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    flex: 0.9,
+  },
+  infoContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  titlePriceContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  price: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: '#F4ACB7',
+  },
+  backgroundContainer: {
+    backgroundColor: '#D8E2DC',
+  },
+  buttonContainer: {
+    marginHorizontal: 20,
+    marginTop: 15,
+  },
+  attributeContainer: {
+    marginBottom: 10,
+  },
+  attributeKey: {
+    fontWeight: 'bold',
+    fontSize: 17,
   },
 });

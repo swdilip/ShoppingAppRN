@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: 'white',
     elevation: 20,
-    shadowColor: '#52006A',
+    shadowColor: '#F4ACB7',
     flexDirection: 'row-reverse',
   },
   detailsContainer: {flex: 0.7},
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
   },
-  price: {fontWeight: 'bold', fontSize: 15, marginTop: 8, color: 'blue'},
+  price: {fontWeight: 'bold', fontSize: 15, marginTop: 8, color: '#9D8189'},
   picture: {
     flex: 0.3,
     marginRight: 15,
