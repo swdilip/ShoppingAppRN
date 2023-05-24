@@ -18,3 +18,10 @@ export interface Rating {
 export interface NavigationProps {
   navigation: NavigationProp<ParamListBase>;
 }
+
+export type Order = {
+  items: Product[]; //Rename variable
+  user: string;
+  address: string;
+  deliveryTime: number;
+};

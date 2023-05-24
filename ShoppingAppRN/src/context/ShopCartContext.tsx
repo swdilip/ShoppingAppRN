@@ -1,9 +1,14 @@
 import React, {createContext, useState} from 'react';
 import {Product} from '../Types';
 
+interface ProductInCart {
+  cartId: number;
+  product: Product;
+}
+
 interface ShopCartContext {
-  items: Array<Product>;
-  setItems: React.Dispatch<React.SetStateAction<Array<Product>>>;
+  items: Array<ProductInCart>;
+  setItems: React.Dispatch<React.SetStateAction<Array<ProductInCart>>>;
 }
 
 export const ShopCartContext = createContext<ShopCartContext>({
@@ -12,7 +17,7 @@ export const ShopCartContext = createContext<ShopCartContext>({
 });
 
 export const ShopCartProvider = ({children}: {children: React.ReactNode}) => {
-  const [items, setItems] = useState<Array<Product>>([]);
+  const [items, setItems] = useState<Array<ProductInCart>>([]);
 
   return (
     <ShopCartContext.Provider value={{items, setItems}}>
