@@ -3,9 +3,21 @@ import {View, FlatList, Image, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import OrderStatusBadge from '../components/OrderStatusBadge';
-import {Order} from '../Types';
+import {Order, Product} from '../Types';
 
-export default function OrderCard({items, user, address, deliveryTime}: Order) {
+type Props = {
+  products: Product[];
+  user: string;
+  address: string;
+  deliveryTime: number;
+};
+
+export default function OrderCard({
+  products,
+  user,
+  address,
+  deliveryTime,
+}: Props) {
   return (
     <View style={styles.orderCardBorder}>
       <LinearGradient
@@ -18,7 +30,7 @@ export default function OrderCard({items, user, address, deliveryTime}: Order) {
           <OrderStatusBadge deliveryTime={deliveryTime} />
           <View>
             <FlatList
-              data={items}
+              data={products}
               horizontal={true}
               renderItem={item => (
                 <View style={styles.pictureGradientContainer}>

@@ -1,14 +1,14 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Image, Text, View, Button, Alert} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {Image, Text, View, Button, Alert, StyleSheet} from 'react-native';
 import {ShopCartContext} from '../context/ShopCartContext';
 import {ProductScreenProps} from '../routes/Routes';
+import {Product} from '../Types';
 
 export default function ProductScreen({route}: ProductScreenProps) {
   const productId = route.params?.productId;
   const {items, setItems} = useContext(ShopCartContext);
 
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
     async function getProduct() {
@@ -38,10 +38,7 @@ export default function ProductScreen({route}: ProductScreenProps) {
     <View>
       <Text>{product.title}</Text>
       <View>
-        <Image
-          source={{uri: product.image}}
-          style={{width: 150, height: 150}}
-        />
+        <Image source={{uri: product.image}} style={styles.imageStyle} />
       </View>
       <Text>Category: {product.category}</Text>
       <Text>Description: {product.description}</Text>
@@ -55,3 +52,10 @@ export default function ProductScreen({route}: ProductScreenProps) {
     <></>
   );
 }
+
+const styles = StyleSheet.create({
+  imageStyle: {
+    width: 150,
+    height: 150,
+  },
+});

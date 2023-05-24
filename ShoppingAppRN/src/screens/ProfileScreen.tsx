@@ -12,12 +12,12 @@ export default function () {
       <Text>User Profile Screen</Text>
       <FlatList
         data={orders}
-        renderItem={item => (
+        renderItem={order => (
           <OrderCard
-            items={item.item.items}
-            user={item.item.user}
-            address={item.item.address}
-            deliveryTime={item.item.deliveryTime}
+            products={order.item.items}
+            user={order.item.user}
+            address={order.item.address}
+            deliveryTime={order.item.deliveryTime}
           />
         )}
         ListEmptyComponent={

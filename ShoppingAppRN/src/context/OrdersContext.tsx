@@ -5,7 +5,7 @@ import {Order} from '../Types';
 //Would be similar to ShopCartContext
 
 interface OrdersContext {
-  orders: Array<Order> | [];
+  orders: Order[];
   setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
 }
 
@@ -15,7 +15,7 @@ export const OrdersContext = createContext<OrdersContext>({
 });
 
 export const OrdersProvider = ({children}: {children: React.ReactNode}) => {
-  const [orders, setOrders] = useState<Array<Order>>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   return (
     <OrdersContext.Provider value={{orders, setOrders}}>

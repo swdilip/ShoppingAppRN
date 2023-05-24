@@ -20,7 +20,7 @@ export interface NavigationProps {
 }
 
 export type Order = {
-  items: Product[];
+  items: Product[]; //Rename variable
   user: string;
   address: string;
   deliveryTime: number;
