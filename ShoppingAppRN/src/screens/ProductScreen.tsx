@@ -11,6 +11,7 @@ import {
 import {ShopCartContext} from '../context/ShopCartContext';
 import {ProductScreenProps} from '../routes/Routes';
 import {Product} from '../Types';
+import RatingStars from '../components/RatingStars';
 
 export default function ProductScreen({route}: ProductScreenProps) {
   const productId = route.params?.productId;
@@ -64,9 +65,10 @@ export default function ProductScreen({route}: ProductScreenProps) {
           </View>
           <View style={styles.attributeContainer}>
             <Text style={styles.attributeKey}>Rating</Text>
-            <Text>
-              {product.rating.rate} by {product.rating.count} Users
-            </Text>
+            <RatingStars
+              rate={product.rating.rate}
+              count={product.rating.count}
+            />
           </View>
           <View style={styles.buttonContainer}>
             <Button title="Add to Cart" onPress={addItem} />
