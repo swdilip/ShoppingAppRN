@@ -12,11 +12,12 @@ import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CheckoutScreen from '../screens/CheckoutScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import {View} from 'react-native';
+import {Button, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';
 import {useAuthContext} from '../context/UserAuthContext';
+import MapScreen from '../screens/MapScreen';
 
 type HomeStackParamList = {
   Home: undefined;
@@ -44,7 +45,9 @@ function HomeStackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{title: `Hello, ${user}`}}
+        options={{
+          title: `Hello, ${user}`,
+        }}
       />
       <Stack.Screen name="Product">
         {props => <ProductScreen {...props} />}
@@ -69,9 +72,9 @@ function AppTabScreen() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="HomeTab">
+      initialRouteName="Home Tab">
       <Tab.Screen
-        name="HomeTab"
+        name="Home Tab"
         component={HomeStackScreen}
         options={{
           tabBarIcon: () => {
@@ -84,7 +87,7 @@ function AppTabScreen() {
         }}
       />
       <Tab.Screen
-        name="ShoppingCartTab"
+        name="Cart"
         component={ShoppingCartStackScreen}
         options={{
           tabBarIcon: () => {
@@ -98,13 +101,26 @@ function AppTabScreen() {
         }}
       />
       <Tab.Screen
-        name="ProfileTab"
+        name="Orders"
         component={ProfileScreen}
         options={{
           tabBarIcon: () => {
             return (
               <View>
                 <Icon name="user" size={30} color="#6b6964" />
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          tabBarIcon: () => {
+            return (
+              <View>
+                <Icon name="map" size={30} color="#6b6964" />
               </View>
             );
           },
