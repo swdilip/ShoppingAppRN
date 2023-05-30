@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, TextInput, View, Button} from 'react-native';
+import {Text, TextInput, View, Button, StyleSheet} from 'react-native';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {
   onDisplayNotification,
   onCreateTriggerNotification,
@@ -72,7 +73,20 @@ export default function CheckoutScreen() {
         placeholder="Enter Address"
         onChangeText={onAddressChangeHandler}
       />
-      <Text>Choose Shipping Time</Text>
+      <View style={styles.container}>
+        <GooglePlacesAutocomplete
+          placeholder="Search Address"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details);
+          }}
+          query={{
+            key: '',
+            language: 'en',
+          }}
+        />
+      </View>
+      {/* <Text>Choose Shipping Time</Text> */}
       <Button title="Place Order" onPress={placeOrder} />
     </View>
   );
@@ -83,3 +97,13 @@ export default function CheckoutScreen() {
 //Shipping Date
 //Shopping cart overview
 //Payment method
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 5,
+    position: 'absolute',
+    marginBottom: 50,
+    width: '90%',
+    padding: 8,
+  },
+});
