@@ -12,7 +12,7 @@ import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CheckoutScreen from '../screens/CheckoutScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import {Button, View} from 'react-native';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';

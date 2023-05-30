@@ -77,7 +77,6 @@ export default function CheckoutScreen() {
         <GooglePlacesAutocomplete
           placeholder="Search Address"
           onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
             console.log(data, details);
           }}
           query={{
