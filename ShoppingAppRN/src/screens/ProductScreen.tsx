@@ -12,6 +12,7 @@ import {ShopCartContext} from '../context/ShopCartContext';
 import {ProductScreenProps} from '../routes/Routes';
 import {Product} from '../Types';
 import RatingStars from '../components/RatingStars';
+import ThemedButton from '../components/ThemedButton';
 
 export default function ProductScreen({route}: ProductScreenProps) {
   const productId = route.params?.productId;
@@ -70,9 +71,7 @@ export default function ProductScreen({route}: ProductScreenProps) {
               count={product.rating.count}
             />
           </View>
-          <View style={styles.buttonContainer}>
-            <Button title="Add to Cart" onPress={addItem} />
-          </View>
+          <ThemedButton onPress={addItem} title={'Add to Cart'} />
         </View>
       </View>
     </ScrollView>
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: 'bold',
     fontSize: 25,
-    color: '#F4ACB7',
+    color: '#9D8189',
   },
   backgroundContainer: {
     backgroundColor: '#D8E2DC',

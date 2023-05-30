@@ -7,16 +7,16 @@ import notifee, {
 export async function onDisplayNotification() {
   await notifee.requestPermission();
 
-  //   const channelID = await notifee.createChannel({
-  //     id: 'default',
-  //     name: 'Default Channel',
-  //   });
+  const channelID = await notifee.createChannel({
+    id: 'default',
+    name: 'Default Channel',
+  });
 
   await notifee.displayNotification({
     title: '<p style="color: #3389FF"><b>Order Placed!</b></p> 📦',
     body: '<p style="color: #8842DF">Your order for a Product has been placed</p>',
     android: {
-      channelId: 'default',
+      channelId: channelID,
       smallIcon: 'ic_launcher_round',
       pressAction: {
         id: 'default',
