@@ -17,6 +17,7 @@ export default function () {
             products={order.item.items}
             user={order.item.user}
             address={order.item.address}
+            location={order.item.location}
             deliveryTime={order.item.deliveryTime}
           />
         )}

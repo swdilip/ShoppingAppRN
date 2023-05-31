@@ -23,5 +23,6 @@ export type Order = {
   items: Product[]; //Rename variable
   user: string;
   address: string;
+  location?: {lat: number; lng: number};
   deliveryTime: number;
 };

@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ShopCartContext} from '../context/ShopCartContext';
 import {useAuthContext} from '../context/UserAuthContext';
-import MapScreen from '../screens/MapScreen';
+// import MapScreen from '../screens/MapScreen';
 
 type HomeStackParamList = {
   Home: undefined;
@@ -113,7 +113,7 @@ function AppTabScreen() {
           },
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Map"
         component={MapScreen}
         options={{
@@ -125,7 +125,7 @@ function AppTabScreen() {
             );
           },
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

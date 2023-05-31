@@ -3,12 +3,14 @@ import {View, FlatList, Image, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import OrderStatusBadge from '../components/OrderStatusBadge';
-import {Order, Product} from '../Types';
+import {Product} from '../Types';
+import MapScreen from '../screens/MapScreen';
 
 type Props = {
   products: Product[];
   user: string;
   address: string;
+  location?: {lat: number; lng: number};
   deliveryTime: number;
 };
 
@@ -16,6 +18,7 @@ export default function OrderCard({
   products,
   user,
   address,
+  location,
   deliveryTime,
 }: Props) {
   return (
@@ -27,6 +30,11 @@ export default function OrderCard({
           <Text style={styles.nameText}>Recipient: {user}</Text>
           <Text style={styles.addressText}>Address: {address}</Text>
           <Text style={styles.addressText}>Delivery: {deliveryTime}</Text>
+          {location && (
+            <Text>
+              Lat: {location.lat} Long: {location.lng}
+            </Text>
+          )}
           <OrderStatusBadge deliveryTime={deliveryTime} />
           <View>
             <FlatList
@@ -47,6 +55,9 @@ export default function OrderCard({
                 </View>
               )}
             />
+          </View>
+          <View>
+            <MapScreen lat={location.lat} lng={location.lng} />
           </View>
         </View>
       </LinearGradient>

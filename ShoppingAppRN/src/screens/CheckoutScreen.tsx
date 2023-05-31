@@ -5,6 +5,7 @@ import {
   onDisplayNotification,
   onCreateTriggerNotification,
 } from '../utils/notifications';
+import {constants} from '../utils/constants';
 import {OrdersContext} from '../context/OrdersContext';
 import {Order} from '../Types';
 import {ShopCartContext} from '../context/ShopCartContext';
@@ -17,6 +18,7 @@ export default function CheckoutScreen() {
     items: [],
     user: '',
     address: '',
+    location: {},
     deliveryTime: 0,
   });
   // const Addresses = data.addresses.map(item => {
@@ -55,6 +57,17 @@ export default function CheckoutScreen() {
     });
   }
 
+  async function onAddressSelected(placeId: string) {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${constants.GOOGLE_API_KEY}`,
+    );
+    const jsonData = await response.json();
+    setOrder({
+      ...order,
+      location: jsonData.results[0].geometry.location,
+    });
+  }
+
   function placeOrder() {
     const date = new Date(Date.now());
     date.setSeconds(date.getSeconds() + 15);
@@ -76,11 +89,12 @@ export default function CheckoutScreen() {
       <View style={styles.container}>
         <GooglePlacesAutocomplete
           placeholder="Search Address"
-          onPress={(data, details = null) => {
-            console.log(data, details);
+          onPress={data => {
+            // console.log(data, details);
+            onAddressSelected(data.place_id);
           }}
           query={{
-            key: '',
+            key: constants.GOOGLE_API_KEY,
             language: 'en',
           }}
         />
